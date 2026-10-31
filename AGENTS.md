@@ -1,6 +1,6 @@
 # Pixel Studio agent guide
 
-This file is the handoff document for future coding agents working in this repository. Keep it synchronized with `app.js`, `index.html`, and `styles.css`. The user-facing overview and JSON examples live in `README.md`.
+This file is the handoff document for future coding agents working in this repository. Keep it synchronized with `app.js`, `index.html`, and `styles.css`. The user-facing overview and JSON formats live in `README.md`; local example artwork is kept in the ignored asset archive.
 
 ## Project purpose and boundaries
 
@@ -19,10 +19,9 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | `robots.txt` | Allows public crawling and points crawlers to the deployed sitemap |
 | `sitemap.xml` | Sitemap for the single public application URL |
 | `README.md` | User setup, behavior, JSON format reference, API examples and file map |
-| `examples/` | Importable pixel-art JSON examples, including legacy commands, angel art and transparent chibi project. |
-| `assets/source-images/` | Generated/imported source PNGs and local previews. PNGs here are excluded by `.gitignore`; keep shareable pixel art in `examples/` JSON. |
-| `.gitignore` | Excludes source PNGs under `assets/source-images/` and the independent `SubProjects/` directory from this repository. |
-| `SubProjects/` | Git-ignored independent project area. Do not treat its projects as part of Pixel Studio; each subproject maintains its own README and agent guide. |
+| `SubProjects/private-image-assets-saver/` | Local, Git-ignored asset archive for original images, generated previews, pixel-art JSON, and animation frames. This is data storage, not an application project. |
+| `.gitignore` | Excludes the private asset archive and independent `SubProjects/` area from this repository. |
+| `SubProjects/PixelMotionStudio/` | Independent GIF maker project. Keep its code separate from Pixel Studio; generated example frames are archived beside it under `private-image-assets-saver/`. |
 
 The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar controls are created dynamically near the top of that file and then wired to events later in the same IIFE. Keep IDs and selectors synchronized if relocating those controls into static HTML.
 
@@ -64,9 +63,9 @@ Theme, zoom and selected tool are saved in projects but are not part of the art-
 - Palette migration key: `pixel-atelier-palette-v1`.
 - Current autosave uses the `pixel-studio-project` v1 object described below.
 - `restore()` also accepts the previous raw 128×128 RGBA numeric array and the earlier `{width,height,pixels:[...]}` object.
-- `examples/angel-pixel-art.json` is a bare array of operations. Preserve bare-array command support unless intentionally removing the legacy example format.
-- Keep shareable artwork JSON under `examples/`; keep local raster previews and source images under `assets/source-images/`.
-- Keep original/generated PNG source images under `assets/source-images/`. Only that directory's PNG files are ignored; keep final pixel-art project/command JSON files tracked under `examples/`.
+- Bare arrays of operations remain a supported legacy command format; the example JSON file itself is stored in the private asset archive.
+- Artwork, original images, previews, and animation frames belong in `SubProjects/private-image-assets-saver/`, organized by type. Do not add these binary or example artwork assets back to the application tree unless the user asks for distributable samples.
+- Pixel-art project and command JSON examples are also archived locally and are not tracked by this application repository.
 - Large project data is Base64 in local storage. A 512×512 RGBA project is about 1.4 MB before JSON/localStorage overhead; `save()` handles storage quota errors by updating the save status.
 
 ## JSON contracts

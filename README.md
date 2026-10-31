@@ -162,8 +162,7 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
 - `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, JSON/API, 저장/불러오기
-- `examples/`: 가져오기 가능한 픽셀아트 JSON 예제. `demon-maid-sd-pixel.project.json`은 투명 배경, 128×160, 16색 SD 캐릭터 예제입니다.
-- `assets/source-images/`: 생성·가져오기 원본 PNG 경로. `demon-maid-sd-pixel-source.png`를 포함한 PNG는 `.gitignore` 규칙으로 Git에서 제외하고, 공유할 픽셀아트는 `examples/`의 JSON으로 보관
-- `.gitignore`: 원본 PNG 제외 규칙
+- 픽셀아트 JSON, 원본 이미지, 미리보기 및 GIF 프레임은 `SubProjects/private-image-assets-saver/`에 종류별로 로컬 보관합니다. 이 폴더는 Git에서 제외됩니다. JSON 예제 가져오기와 GIF 제작 절차는 해당 폴더의 README를 참고하세요.
+- `.gitignore`: 비공개 에셋 보관 폴더와 독립 서브프로젝트 제외 규칙
 - `robots.txt`, `sitemap.xml`: 공개 사이트 검색 크롤링 정책과 대표 URL 목록
 - `AGENTS.md`: 에이전트용 구조·규약·수정 지침
