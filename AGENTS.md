@@ -98,6 +98,8 @@ Theme, zoom and selected tool are saved in projects but are not part of the art-
 
 Project JSON preserves per-pixel alpha. Both canvas contexts must remain alpha-enabled, and the checkerboard belongs to CSS behind the canvas rather than the raster. Command colors remain opaque six-digit hex; don't claim command documents can encode transparency.
 
+Fresh pixel memory starts transparent. The eraser and clear button set RGBA to zero. `restore()` migrates an autosaved solid opaque black canvas to a transparent blank canvas, which fixes blank data saved before alpha rendering; preserve all other saved projects.
+
 ### AI commands: `pixel-studio-commands` v1
 
 The command document is `{format, version, settings?, commands}`. Settings are applied before operations and the full document is one transaction. `settings` accepts:
