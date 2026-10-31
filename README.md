@@ -12,6 +12,10 @@
 
 `index.html`에는 한국어 페이지 제목·설명, canonical URL, Open Graph 및 Twitter 공유 메타데이터, SVG favicon이 설정되어 있습니다. 공개 주소 `https://pixelatelier.vercel.app/` 기준으로 루트 `robots.txt`와 단일 페이지 `sitemap.xml`을 제공합니다. 배포 도메인이 바뀌면 canonical, `og:url`, sitemap URL과 robots.txt의 Sitemap 항목을 함께 갱신하세요. 사이트를 배포하는 것만으로 검색 노출이 보장되지는 않습니다.
 
+## 별도 서브프로젝트
+
+`SubProjects/`는 현재 픽셀 스튜디오와 관계없는 독립 실험·배포용 프로젝트 경로이며, 루트 `.gitignore`에서 제외됩니다. 프로젝트별로 자체 실행 방법과 `README.md`, `AGENTS.md`를 관리하고 독립 저장소/배포 단위로 다룹니다. 현재 서브프로젝트는 `PixelMotionStudio/`의 프레임 순서 관리 및 GIF 제작 웹앱입니다.
+
 ## 캔버스와 픽셀 밀도
 
 화면에 표시하는 캔버스는 400×400입니다. 내부 픽셀 격자는 별도로 설정하며 각 축에 16–512 정수를 사용할 수 있습니다. 기본값은 128×128, 총 16,384픽셀입니다. 직사각형 격자는 표시 영역 가운데에서 비율을 유지해 그립니다.

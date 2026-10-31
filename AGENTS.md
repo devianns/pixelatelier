@@ -21,7 +21,8 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | `README.md` | User setup, behavior, JSON format reference, API examples and file map |
 | `examples/` | Importable pixel-art JSON examples, including legacy commands, angel art and transparent chibi project. |
 | `assets/source-images/` | Generated/imported source PNGs and local previews. PNGs here are excluded by `.gitignore`; keep shareable pixel art in `examples/` JSON. |
-| `.gitignore` | Excludes PNG files under `assets/source-images/` only. |
+| `.gitignore` | Excludes source PNGs under `assets/source-images/` and the independent `SubProjects/` directory from this repository. |
+| `SubProjects/` | Git-ignored independent project area. Do not treat its projects as part of Pixel Studio; each subproject maintains its own README and agent guide. |
 
 The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar controls are created dynamically near the top of that file and then wired to events later in the same IIFE. Keep IDs and selectors synchronized if relocating those controls into static HTML.
 
