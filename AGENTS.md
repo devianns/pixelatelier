@@ -32,7 +32,7 @@ The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar c
 - `buffer` is the logical-resolution offscreen canvas. `pixels` is its row-major RGBA `Uint8ClampedArray`, exactly `gridWidth * gridHeight * 4` bytes.
 - Pixels are addressed from top-left: x increases rightward, y downward. Valid point coordinates are `0 <= x < gridWidth`, `0 <= y < gridHeight`.
 - `getDrawBounds()` fits the logical canvas inside the square display while preserving its aspect ratio. Pointer mapping rejects clicks in the remaining letterbox.
-- Both display and offscreen canvas contexts preserve alpha. `render()` scales RGBA pixels with smoothing disabled; the CSS checkerboard behind the canvas indicates transparent pixels and must not be painted into exported pixels.
+- Both art and offscreen canvas contexts preserve alpha. `render()` scales RGBA pixels with smoothing disabled. Pixel boundary lines are drawn on the separate `#gridOverlay` canvas, never into `#artCanvas` or the logical RGBA buffer. `gridToggle` also switches the `#canvasFrame` transparency checkerboard to a user-selected solid preview background; both are display-only and must not alter art pixels or PNG exports. Store the solid preview color separately from project JSON.
 - `resizeGrid()` validates dimensions and resamples existing artwork with nearest-neighbor scaling. It records one history entry unless called with `record=false` as part of a larger transaction.
 
 Preset keys and values are defined in `densityPresets` in `app.js`:
@@ -159,7 +159,7 @@ Transparent source pixels remain transparent; visible pixels are quantized and m
 - `applyCommands(documentOrArray)`, `getState()`, `exportProject()`, `exportPNG()`.
 - `getCommandsHelp()`, `getJSONFormatHelp()`.
 
-The top PNG button exports the logical buffer at current grid dimensions. API `exportPNG()` exports the visible 400×400 canvas including the current grid overlay; preserve this distinction unless intentionally changing the API contract.
+The top PNG button exports the logical buffer at current grid dimensions. API `exportPNG()` exports the 400×400 art canvas without the separate grid overlay. Both exports are independent of the grid visibility toggle.
 
 ## Editing guidance for future agents
 
