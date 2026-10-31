@@ -16,7 +16,7 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, JSON formats, and `window.pixelArtCanvas` |
 | `styles.css` | Editor layout, responsive rules, light/dark themes, controls and canvas stage |
 | `README.md` | User setup, behavior, JSON format reference, API examples and file map |
-| `angel-pixel-art.json` | Backward-compatible example using a bare array of drawing commands |
+| `examples/` | Art samples and importable JSON examples. Includes the legacy bare-array sample, two angel command documents, and the v2 PNG preview. |
 
 The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar controls are created dynamically near the top of that file and then wired to events later in the same IIFE. Keep IDs and selectors synchronized if relocating those controls into static HTML.
 
@@ -58,7 +58,8 @@ Theme, zoom and selected tool are saved in projects but are not part of the art-
 - Palette migration key: `pixel-atelier-palette-v1`.
 - Current autosave uses the `pixel-studio-project` v1 object described below.
 - `restore()` also accepts the previous raw 128×128 RGBA numeric array and the earlier `{width,height,pixels:[...]}` object.
-- `angel-pixel-art.json` is a bare array of operations. Preserve bare-array command support unless intentionally removing the legacy example format.
+- `examples/angel-pixel-art.json` is a bare array of operations. Preserve bare-array command support unless intentionally removing the legacy example format.
+- Keep artwork samples and their preview assets under `examples/`; update documentation paths when adding or renaming example files.
 - Large project data is Base64 in local storage. A 512×512 RGBA project is about 1.4 MB before JSON/localStorage overhead; `save()` handles storage quota errors by updating the save status.
 
 ## JSON contracts

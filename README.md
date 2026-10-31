@@ -150,5 +150,5 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
 - `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, JSON/API, 저장/불러오기
-- `angel-pixel-art.json`: 이전 명령 배열 형식으로 만든 샘플 그림
+- `examples/`: 예제 그림과 가져오기용 JSON 파일 모음 (`angel-pixel-art.json`, `celestial-angel-chibi.json`, `celestial-angel-chibi-v2.json`, `celestial-angel-chibi-v2.png`)
 - `AGENTS.md`: 에이전트용 구조·규약·수정 지침
