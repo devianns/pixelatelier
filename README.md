@@ -10,7 +10,7 @@
 
 ## 사이트 메타데이터
 
-`index.html`에는 한국어 페이지 제목·설명, Open Graph 및 Twitter 공유 메타데이터, SVG favicon이 설정되어 있습니다. 실제 도메인이 아직 정해지지 않아 canonical URL, `og:url`, sitemap은 추가하지 않았습니다. 검색 엔진 수집은 기본 허용 상태이며, 검색 결과 노출은 이 정적 앱을 공개 URL에 배포한 뒤 가능합니다.
+`index.html`에는 한국어 페이지 제목·설명, canonical URL, Open Graph 및 Twitter 공유 메타데이터, SVG favicon이 설정되어 있습니다. 공개 주소 `https://pixelatelier.vercel.app/` 기준으로 루트 `robots.txt`와 단일 페이지 `sitemap.xml`을 제공합니다. 배포 도메인이 바뀌면 canonical, `og:url`, sitemap URL과 robots.txt의 Sitemap 항목을 함께 갱신하세요. 사이트를 배포하는 것만으로 검색 노출이 보장되지는 않습니다.
 
 ## 캔버스와 픽셀 밀도
 
@@ -161,4 +161,5 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 - `examples/`: 가져오기 가능한 픽셀아트 JSON 예제 (`angel-pixel-art.json`, `celestial-angel-chibi.json`, `celestial-angel-chibi-v2.json`, `pink-chibi-transparent.project.json`)
 - `assets/source-images/`: 생성·가져오기 원본 PNG 경로. PNG는 `.gitignore` 규칙으로 Git에서 제외하고, 공유할 픽셀아트는 `examples/`의 JSON으로 보관
 - `.gitignore`: 원본 PNG 제외 규칙
+- `robots.txt`, `sitemap.xml`: 공개 사이트 검색 크롤링 정책과 대표 URL 목록
 - `AGENTS.md`: 에이전트용 구조·규약·수정 지침

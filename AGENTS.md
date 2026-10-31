@@ -16,6 +16,8 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, JSON formats, and `window.pixelArtCanvas` |
 | `styles.css` | Editor layout, responsive rules, light/dark themes, controls and canvas stage |
 | `favicon.svg` | Lightweight vector favicon used by the static page |
+| `robots.txt` | Allows public crawling and points crawlers to the deployed sitemap |
+| `sitemap.xml` | Sitemap for the single public application URL |
 | `README.md` | User setup, behavior, JSON format reference, API examples and file map |
 | `examples/` | Importable pixel-art JSON examples, including legacy commands, angel art and transparent chibi project. |
 | `assets/source-images/` | Generated/imported source PNGs and local previews. PNGs here are excluded by `.gitignore`; keep shareable pixel art in `examples/` JSON. |
