@@ -69,10 +69,11 @@
           <div class="api-label"><span class="api-indicator"></span> CANVAS API <code>v1.0</code></div>
           <div class="api-chips"><code>setPixel</code><code>fillRect</code><code>drawLine</code><code>fillPolygon</code></div>
           <label class="prompt-label" for="aiCommands">그리기 명령 <span>JSON</span></label>
+          <p class="command-note">픽셀 좌표는 0–127 정수입니다. 사각형 영역은 캔버스 경계에서 잘립니다.</p>
           <textarea id="aiCommands" spellcheck="false" aria-label="AI 그리기 JSON 명령" placeholder="AI가 생성한 명령을 여기에 붙여넣으세요"></textarea>
           <button id="runAiButton" class="button button-ai" type="button"><span>✳</span> 명령 실행하기</button>
           <p id="aiMessage" class="ai-message" aria-live="polite">실행 전 미리보기에서 명령을 확인합니다.</p>
-          <button id="exampleButton" class="example-link" type="button">예시 명령 불러오기 <span>↗</span></button>
+          <div class="command-links"><button id="exampleButton" class="example-link" type="button">예시 명령 <span>↗</span></button><button id="loadCommandsButton" class="example-link" type="button">JSON 파일 열기 <span>↑</span></button><input id="commandsFileInput" type="file" accept="application/json,.json" hidden /></div>
           <div class="section-divider"></div>
           <div class="format-heading"><strong>명령 형식</strong><span>미니 가이드</span></div>
           <pre class="code-sample"><span class="code-muted">// 한 픽셀 지정</span>

@@ -29,6 +29,6 @@ pixelArtCanvas.applyCommands([
 ]);
 ```
 
-지원 명령은 `setPixel`, `fillRect`, `drawLine`, `fillPolygon`, `clear`입니다. 우측 AI 스튜디오에 JSON 명령을 입력하거나 예시 명령을 불러와 실행하면 됩니다. 이는 모델 연결 전에도 인터페이스를 시험할 수 있는 입력부입니다. 실제 자연어 AI 연결에는 이후 모델 API를 호출하는 백엔드가 필요하며, API 키를 브라우저 코드에 직접 넣으면 안 됩니다.
+지원 명령은 `setPixel`, `fillRect`, `drawLine`, `fillPolygon`, `clear`입니다. 우측 AI 스튜디오에 JSON 명령을 입력하거나 JSON 파일을 불러와 실행하면 됩니다. `angel-pixel-art.json`은 참고 이미지에서 영감을 받은 픽셀 아트 예시입니다. 이는 모델 연결 전에도 인터페이스를 시험할 수 있는 입력부입니다. 실제 자연어 AI 연결에는 이후 모델 API를 호출하는 백엔드가 필요하며, API 키를 브라우저 코드에 직접 넣으면 안 됩니다.
 
-좌표는 0–127 범위의 정수입니다. `getState()`는 `{width, height, displayWidth, displayHeight, format, pixels}`를 반환하고, `pixels`는 RGBA 순서의 65,536바이트 `Uint8ClampedArray`입니다. `getPixel(x, y)`는 해당 픽셀의 HEX 색상을 반환합니다.
+픽셀, 직선, 폴리곤의 좌표는 0–127 범위의 정수입니다. 사각형은 양의 정수 `width`/`height`를 받으며 캔버스 바깥으로 나간 부분은 잘립니다. `getState()`는 `{width, height, displayWidth, displayHeight, format, pixels}`를 반환하고, `pixels`는 RGBA 순서의 65,536바이트 `Uint8ClampedArray`입니다. `getPixel(x, y)`는 해당 픽셀의 HEX 색상을 반환합니다.
