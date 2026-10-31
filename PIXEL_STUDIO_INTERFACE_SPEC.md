@@ -143,7 +143,9 @@ Project documents preserve the exact raster rather than a drawing history:
 }
 ```
 
-`pixels.data` is Base64 of row-major RGBA8 bytes: for each pixel in y-major then x-major order, store red, green, blue, alpha bytes. The decoded byte count must equal `canvas.width × canvas.height × 4`. Project files require valid dimensions and pixel data. Prefer the editor's project export when exact data is needed; AI agents should usually author command documents instead of hand-writing Base64.
+`pixels.data` is Base64 of row-major RGBA8 bytes: for each pixel in y-major then x-major order, store red, green, blue, alpha bytes. Alpha is preserved per pixel; `A = 0` is fully transparent and `A = 255` is fully opaque. The decoded byte count must equal `canvas.width × canvas.height × 4`. Project files require valid dimensions and pixel data. Prefer the editor's project export when exact data is needed; AI agents should usually author command documents instead of hand-writing Base64.
+
+Command operations use opaque `#RRGGBB` colors and cannot set per-pixel alpha. Use a project document when the finished artwork needs transparent pixels. The studio's checkerboard is only a transparency indicator; it is not part of the project raster or PNG export.
 
 ## 5. AI drawing workflow
 
@@ -170,5 +172,5 @@ Other web UIs can implement this protocol by parsing the versioned wrapper, appl
 
 ## 7. Current implementation limits
 
-The current Pixel Studio command runner supports exactly the version 1 operations and settings documented here. It does not execute JavaScript embedded in JSON, arbitrary scripts, layers, transparency per command, gradients, text, masks or animation. Each command uses an opaque hex color. Do not add undocumented operation fields expecting them to render. Increase detail by using a finer grid and thoughtfully composed clusters, not by using unsupported drawing features.
+The current Pixel Studio command runner supports exactly the version 1 operations and settings documented here. It does not execute JavaScript embedded in JSON, arbitrary scripts, layers, transparency per command, gradients, text, masks or animation. Each command uses an opaque hex color. Project documents preserve RGBA alpha. Do not add undocumented operation fields expecting them to render. Increase detail by using a finer grid and thoughtfully composed clusters, not by using unsupported drawing features.
 

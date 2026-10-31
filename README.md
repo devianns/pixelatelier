@@ -33,7 +33,7 @@
 - 논리 격자 크기의 PNG 내보내기
 - 라이트/다크 테마
 
-이미지 가져오기는 현재 격자 크기로 축소합니다. `contain`은 여백을 흰색으로 채우고 전체 이미지를 보존하며, `cover`는 넘치는 부분을 잘라 캔버스를 채우고, `stretch`는 이미지 비율을 변경합니다. 색상 수 줄이기에는 median-cut 팔레트 양자화를 사용합니다. 가져온 이미지는 실행 취소 기록에 한 번의 편집으로 추가됩니다.
+이미지 가져오기는 현재 격자 크기로 축소합니다. `contain`은 여백을 투명하게 두고 전체 이미지를 보존하며, `cover`는 넘치는 부분을 잘라 캔버스를 채우고, `stretch`는 이미지 비율을 변경합니다. 투명 PNG는 알파를 유지하고, 색상 수 줄이기에는 median-cut 팔레트 양자화를 사용합니다. 가져온 이미지는 실행 취소 기록에 한 번의 편집으로 추가됩니다.
 
 ## JSON 파일
 
@@ -70,6 +70,8 @@ Pixel Studio는 용도가 다른 두 JSON 형식을 제공합니다.
 ```
 
 `pixels.data`는 왼쪽 위부터 행 순서로 저장한 RGBA 8비트 배열의 Base64입니다. 픽셀 하나당 R, G, B, A 각 1바이트이며, 배열 길이는 `width × height × 4`입니다. 프로젝트 형식은 전체 그림을 정확하게 보존하고 공유할 때 사용합니다.
+
+RGBA 알파 채널을 지원하므로 프로젝트 JSON은 투명 배경 픽셀을 보존합니다. 캔버스의 체크무늬는 투명 영역을 화면에서 구분하기 위한 표시이며 PNG 내보내기에서는 배경으로 들어가지 않습니다. 명령 JSON의 색상 명령은 불투명한 `#RRGGBB` 색상만 지원합니다.
 
 ### 명령 파일: AI 설정과 그리기 지시
 
@@ -150,5 +152,7 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
 - `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, JSON/API, 저장/불러오기
-- `examples/`: 예제 그림과 가져오기용 JSON 파일 모음 (`angel-pixel-art.json`, `celestial-angel-chibi.json`, `celestial-angel-chibi-v2.json`, `celestial-angel-chibi-v2.png`)
+- `examples/`: 가져오기 가능한 픽셀아트 JSON 예제 (`angel-pixel-art.json`, `celestial-angel-chibi.json`, `celestial-angel-chibi-v2.json`, `pink-chibi-transparent.project.json`)
+- `assets/source-images/`: 생성·가져오기 원본 PNG 경로. PNG는 `.gitignore` 규칙으로 Git에서 제외하고, 공유할 픽셀아트는 `examples/`의 JSON으로 보관
+- `.gitignore`: 원본 PNG 제외 규칙
 - `AGENTS.md`: 에이전트용 구조·규약·수정 지침

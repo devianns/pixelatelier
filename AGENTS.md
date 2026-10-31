@@ -16,7 +16,9 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, JSON formats, and `window.pixelArtCanvas` |
 | `styles.css` | Editor layout, responsive rules, light/dark themes, controls and canvas stage |
 | `README.md` | User setup, behavior, JSON format reference, API examples and file map |
-| `examples/` | Art samples and importable JSON examples. Includes the legacy bare-array sample, two angel command documents, and the v2 PNG preview. |
+| `examples/` | Importable pixel-art JSON examples, including legacy commands, angel art and transparent chibi project. |
+| `assets/source-images/` | Generated/imported source PNGs and local previews. PNGs here are excluded by `.gitignore`; keep shareable pixel art in `examples/` JSON. |
+| `.gitignore` | Excludes PNG files under `assets/source-images/` only. |
 
 The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar controls are created dynamically near the top of that file and then wired to events later in the same IIFE. Keep IDs and selectors synchronized if relocating those controls into static HTML.
 
@@ -26,8 +28,8 @@ The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar c
 - `gridWidth` and `gridHeight` are the logical drawing dimensions. Each axis must be an integer from 16 through 512. Default is 128×128 (16,384 logical pixels).
 - `buffer` is the logical-resolution offscreen canvas. `pixels` is its row-major RGBA `Uint8ClampedArray`, exactly `gridWidth * gridHeight * 4` bytes.
 - Pixels are addressed from top-left: x increases rightward, y downward. Valid point coordinates are `0 <= x < gridWidth`, `0 <= y < gridHeight`.
-- `getDrawBounds()` fits the logical canvas inside the square display while preserving its aspect ratio. The remaining display area is white letterbox. Pointer mapping rejects clicks in that letterbox.
-- `render()` copies `pixels` to the offscreen canvas, scales it with smoothing disabled, and optionally draws the logical grid. Keep the backing image and overlay grid aligned.
+- `getDrawBounds()` fits the logical canvas inside the square display while preserving its aspect ratio. Pointer mapping rejects clicks in the remaining letterbox.
+- Both display and offscreen canvas contexts preserve alpha. `render()` scales RGBA pixels with smoothing disabled; the CSS checkerboard behind the canvas indicates transparent pixels and must not be painted into exported pixels.
 - `resizeGrid()` validates dimensions and resamples existing artwork with nearest-neighbor scaling. It records one history entry unless called with `record=false` as part of a larger transaction.
 
 Preset keys and values are defined in `densityPresets` in `app.js`:
@@ -59,7 +61,8 @@ Theme, zoom and selected tool are saved in projects but are not part of the art-
 - Current autosave uses the `pixel-studio-project` v1 object described below.
 - `restore()` also accepts the previous raw 128×128 RGBA numeric array and the earlier `{width,height,pixels:[...]}` object.
 - `examples/angel-pixel-art.json` is a bare array of operations. Preserve bare-array command support unless intentionally removing the legacy example format.
-- Keep artwork samples and their preview assets under `examples/`; update documentation paths when adding or renaming example files.
+- Keep shareable artwork JSON under `examples/`; keep local raster previews and source images under `assets/source-images/`.
+- Keep original/generated PNG source images under `assets/source-images/`. Only that directory's PNG files are ignored; keep final pixel-art project/command JSON files tracked under `examples/`.
 - Large project data is Base64 in local storage. A 512×512 RGBA project is about 1.4 MB before JSON/localStorage overhead; `save()` handles storage quota errors by updating the save status.
 
 ## JSON contracts
@@ -92,6 +95,8 @@ Theme, zoom and selected tool are saved in projects but are not part of the art-
 ```
 
 `pixels.data` decodes to exactly `width * height * 4` bytes in row-major RGBA order. Projects import through the header JSON picker, the AI editor, or `installProject()` via `applyStudioCommands()`.
+
+Project JSON preserves per-pixel alpha. Both canvas contexts must remain alpha-enabled, and the checkerboard belongs to CSS behind the canvas rather than the raster. Command colors remain opaque six-digit hex; don't claim command documents can encode transparency.
 
 ### AI commands: `pixel-studio-commands` v1
 
@@ -128,7 +133,7 @@ Project and command format changes must update all of these together: `getProjec
 - `cover`: preserve aspect ratio; crop overflow to fill the canvas.
 - `stretch`: scale independently to target width and height.
 
-The transparent source background is composited over white. The imported result is opaque and replaces the current canvas in one undo step. Keep source dimensions independent from target grid dimensions.
+Transparent source pixels remain transparent; visible pixels are quantized and made opaque at an alpha threshold of 128. `contain` leaves transparent margins, and import replaces the current canvas in one undo step. Keep source dimensions independent from target grid dimensions.
 
 ## Public browser API
 
