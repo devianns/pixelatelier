@@ -158,8 +158,8 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
 - `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, JSON/API, 저장/불러오기
-- `examples/`: 가져오기 가능한 픽셀아트 JSON 예제 (`angel-pixel-art.json`, `celestial-angel-chibi.json`, `celestial-angel-chibi-v2.json`, `pink-chibi-transparent.project.json`)
-- `assets/source-images/`: 생성·가져오기 원본 PNG 경로. PNG는 `.gitignore` 규칙으로 Git에서 제외하고, 공유할 픽셀아트는 `examples/`의 JSON으로 보관
+- `examples/`: 가져오기 가능한 픽셀아트 JSON 예제. `demon-maid-sd-pixel.project.json`은 투명 배경, 128×160, 16색 SD 캐릭터 예제입니다.
+- `assets/source-images/`: 생성·가져오기 원본 PNG 경로. `demon-maid-sd-pixel-source.png`를 포함한 PNG는 `.gitignore` 규칙으로 Git에서 제외하고, 공유할 픽셀아트는 `examples/`의 JSON으로 보관
 - `.gitignore`: 원본 PNG 제외 규칙
 - `robots.txt`, `sitemap.xml`: 공개 사이트 검색 크롤링 정책과 대표 URL 목록
 - `AGENTS.md`: 에이전트용 구조·규약·수정 지침
