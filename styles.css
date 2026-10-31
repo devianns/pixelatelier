@@ -9,4 +9,38 @@
 .command-note{font-size:8px;color:#8c958c;line-height:1.45;margin:-2px 0 6px}
 .image-tools{display:flex;align-items:center;gap:4px}.image-tools select{max-width:91px;height:25px;border:1px solid #eceae4;border-radius:4px;background:#fbfaf6;color:#647168;font-size:8px;padding:0 4px}.image-tools input{width:39px;height:25px;border:1px solid #eceae4;border-radius:4px;background:#fbfaf6;color:#536057;font:9px var(--mono);text-align:center;padding:0 2px}.image-tools .size-label,.image-tools .size-times{font-size:8px;color:#8b948c}.tool-divider{height:17px;width:1px;background:#ebe9e3;margin:0 3px}.image-tools .text-button{white-space:nowrap;color:#718474;font-size:8px;padding:6px 4px}.image-tools .text-button:hover{background:#f3f4ee;border-radius:4px}
 @media(max-width:1050px){.image-tools select{max-width:58px}.image-tools .size-label{display:none}}
-@media(max-width:680px){.canvas-toolbar{height:auto;min-height:51px;align-items:flex-start;flex-direction:column;gap:4px;padding:7px 9px}.canvas-actions{width:100%;justify-content:space-between;flex-wrap:wrap}.image-tools{gap:2px;flex-wrap:wrap}.image-tools input{width:31px}.image-tools select{max-width:58px}.image-tools .text-button{font-size:0}.image-tools .text-button:first-letter{font-size:14px}.image-tools .tool-divider{display:none}}
+@media(max-width:680px){.canvas-toolbar{height:auto;min-height:51px;align-items:flex-start;flex-direction:column;gap:4px;padding:7px 9px}.canvas-actions{width:100%;justify-content:space-between;flex-wrap:wrap}.image-tools{gap:2px;flex-wrap:wrap;flex:1 1 100%;max-width:100%}.image-tools input{width:31px}.image-tools select{max-width:58px}.image-tools select:first-child{max-width:94px}.image-tools .text-button{font-size:0}.image-tools .text-button:first-letter{font-size:14px}.image-tools .tool-divider{display:none}}
+
+/* Pixel editor chrome: compact project header and optional dark workstation theme. */
+.intro{padding:17px 0 18px;align-items:center}.eyebrow{margin-bottom:7px}.intro h1{font-size:24px;letter-spacing:-.8px}.intro h1 br{display:none}.intro-copy{font-size:10px;margin-top:6px}.file-tools{display:flex;align-items:center;gap:6px;margin-left:auto}.file-tools .button{padding:8px 10px;font-size:9px}.button-muted{background:#eeefe9;color:#526158;border:1px solid #e1e3da}.theme-toggle{border:1px solid #e7e5de;background:#fbfaf6;width:30px;height:30px}
+.image-tools select:first-child{max-width:124px}.canvas-toolbar{gap:10px}.canvas-actions{gap:5px}.command-note{line-height:1.5}.canvas-stage{background-color:#e9e9e2}
+@media(max-width:1050px){.topbar-meta{display:none}.file-tools{gap:4px}.file-tools .button{padding:7px 8px}.intro{padding:14px 0}.intro h1{font-size:22px}}
+@media(max-width:680px){.intro{padding:14px 0 12px}.intro h1{font-size:20px}.intro-copy{max-width:none}.file-tools .button{font-size:0;padding:6px 7px}.file-tools #importStudioButton:before{content:'↥';font-size:13px}.file-tools #exportStudioButton:before{content:'JSON';font-size:8px}.canvas-stage{height:auto}}
+
+:root[data-theme="dark"]{color-scheme:dark;--ink:#e5e9ec;--muted:#a0aab2;--line:#343c46;--paper:#222831;--sage:#86bcae;background:#14181e}
+:root[data-theme="dark"] body{background:#14181e;color:var(--ink)}
+:root[data-theme="dark"] .topbar{border-color:#303741}
+:root[data-theme="dark"] .brand,:root[data-theme="dark"] .intro h1,:root[data-theme="dark"] .panel-heading h2,:root[data-theme="dark"] .canvas-title strong,:root[data-theme="dark"] .format-heading strong{color:#e3e8eb}
+:root[data-theme="dark"] .brand-light,:root[data-theme="dark"] .topbar-meta,:root[data-theme="dark"] .intro-copy,:root[data-theme="dark"] .eyebrow,:root[data-theme="dark"] .footer,:root[data-theme="dark"] .bottom-hint{color:#929da6}
+:root[data-theme="dark"] .intro h1 em{color:#87b9a7}
+:root[data-theme="dark"] .spec-card,:root[data-theme="dark"] .panel{background:#20262e;border-color:#343c46}
+:root[data-theme="dark"] .spec-card strong,:root[data-theme="dark"] .toggle-row strong,:root[data-theme="dark"] .zoom-row>span{color:#d4dade}
+:root[data-theme="dark"] .spec-card small,:root[data-theme="dark"] .toggle-row small,:root[data-theme="dark"] .color-value small,:root[data-theme="dark"] .palette-heading,:root[data-theme="dark"] .ai-card p{color:#98a3aa}
+:root[data-theme="dark"] .spec-separator,:root[data-theme="dark"] .meta-divider,:root[data-theme="dark"] .section-divider,:root[data-theme="dark"] .action-divider,:root[data-theme="dark"] .tool-divider{background:#343c46}
+:root[data-theme="dark"] .tool-button,:root[data-theme="dark"] .color-picker-wrap,:root[data-theme="dark"] .zoom-control,:root[data-theme="dark"] .zoom-control button,:root[data-theme="dark"] .image-tools select,:root[data-theme="dark"] .image-tools input,:root[data-theme="dark"] .theme-toggle{background:#272f39;border-color:#3a444f;color:#d1d9dd}
+:root[data-theme="dark"] .tool-button.active{background:#293d3c;border-color:#4b7771;color:#a9d6c8}
+:root[data-theme="dark"] .canvas-stage{background-color:#191f27;background-image:radial-gradient(#343b44 .65px,transparent .65px)}
+:root[data-theme="dark"] .canvas-frame{box-shadow:0 8px 28px #0007,0 0 0 1px #414a54}
+:root[data-theme="dark"] .canvas-caption{color:#9da8ae}
+:root[data-theme="dark"] .hint-key{background:#2b333c;color:#bec8ca}
+:root[data-theme="dark"] .ai-card{background:#252e31;border-color:#364b49}
+:root[data-theme="dark"] .ai-card strong,:root[data-theme="dark"] .api-label,:root[data-theme="dark"] .api-chips code,:root[data-theme="dark"] .prompt-label{color:#a7c2b6}
+:root[data-theme="dark"] .ai-sparkle{background:#30413e;color:#9bc8b4}
+:root[data-theme="dark"] .api-chips code,:root[data-theme="dark"] .code-sample,:root[data-theme="dark"] .ai-panel textarea{background:#191f26;border-color:#343c46;color:#c4cdd0}
+:root[data-theme="dark"] .ai-panel textarea::placeholder,:root[data-theme="dark"] .ai-message,:root[data-theme="dark"] .code-muted,:root[data-theme="dark"] .format-heading span{color:#87939b}
+:root[data-theme="dark"] .button-muted{background:#2b333d;color:#d1d9dd;border-color:#414b56}
+:root[data-theme="dark"] .example-link,:root[data-theme="dark"] .export-json,:root[data-theme="dark"] .text-button{color:#a9c5b7}
+:root[data-theme="dark"] .canvas-title .live-dot{background:#8cc5a4}
+:root[data-theme="dark"] .footer-dot{color:#66727b}
+:root[data-theme="dark"] .button-dark{background:#397567;color:#f4fffc}
+:root[data-theme="dark"] .toast{background:#e3eee8;color:#1d2926}
