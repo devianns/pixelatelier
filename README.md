@@ -127,6 +127,14 @@ RGBA 알파 채널을 지원하므로 프로젝트 JSON은 투명 배경 픽셀�
 
 `settings`는 선택 항목입니다. 캔버스 크기는 `canvas.width`/`height`로 직접 지정하거나 `preset`으로 지정합니다. 둘 다 있으면 `canvas`의 값이 우선합니다. 지원되는 추가 설정은 `pixelDensity.width`/`height`, `grid.visible`, `imageImport.colorCount`(16, 32, 64), `imageImport.fit`(`contain`, `cover`, `stretch`), `editor.theme`(`light`, `dark`), `editor.zoom`(0.7–1.5), `editor.tool`, `editor.activeColor`, `palette`입니다. 표시 캔버스 크기는 현재 400×400으로 고정되어 내보낸 설정값은 기록용이며 변경 대상으로 사용되지 않습니다.
 
+## 고급 이미지 일괄 변환
+
+기존 작업 공간 아래의 **이미지 일괄 픽셀 변환** 패널에서 여러 이미지 파일을 한 번에 선택하거나 끌어놓습니다. 이 패널은 메인 그리기 캔버스와 독립적이며 대기열의 이미지를 캔버스에 적용하지 않습니다.
+
+- 기존 그리기 모드와 같은 픽셀 프리셋(32²부터 512², 사용자 크기), 색상 수(16/32/64), 맞춤 방식(`contain`, `cover`, `stretch`)을 별도로 지정합니다.
+- 각 입력 이미지를 차례로 픽셀화해 해당 파일명 기반의 개별 PNG로 만들고, 브라우저에서 바로 열 수 있는 ZIP 하나로 내려받습니다. PNG는 이미 압축되어 있으므로 ZIP 내부에서는 추가 압축 없이 저장합니다.
+- 이미지 원본 비율/투명도 처리와 색상 양자화는 기존 단일 이미지 가져오기와 같은 방식을 사용합니다. 맞춤 크기는 가로·세로 각각 16–512 범위이며, 한 번에 최대 200개를 처리할 수 있습니다.
+
 좌표는 현재 격자의 정수 픽셀 위치입니다. 예를 들어 256×192 캔버스에서 x는 0–255, y는 0–191입니다. 지원 명령은 다음과 같습니다.
 
 | `op` | 주요 필드 | 동작 |
@@ -161,7 +169,7 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
-- `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, JSON/API, 저장/불러오기
+- `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, 단일/일괄 이미지 변환 및 ZIP 내보내기, JSON/API, 저장/불러오기
 - 픽셀아트 JSON, 원본 이미지, 미리보기 및 GIF 프레임은 `SubProjects/private-image-assets-saver/`에 종류별로 로컬 보관합니다. 이 폴더는 Git에서 제외됩니다. JSON 예제 가져오기와 GIF 제작 절차는 해당 폴더의 README를 참고하세요.
 - `.gitignore`: 비공개 에셋 보관 폴더와 독립 서브프로젝트 제외 규칙
 - `robots.txt`, `sitemap.xml`: 공개 사이트 검색 크롤링 정책과 대표 URL 목록

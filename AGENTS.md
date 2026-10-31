@@ -12,9 +12,9 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 
 | File | Responsibility |
 | --- | --- |
-| `index.html` | Static page structure, side panels, drawing tools, canvas element and JSON editor |
-| `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, JSON formats, and `window.pixelArtCanvas` |
-| `styles.css` | Editor layout, responsive rules, light/dark themes, controls and canvas stage |
+| `index.html` | Static page structure, side panels, drawing tools, canvas element, JSON editor and independent batch-conversion panel |
+| `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, batch PNG/ZIP export, JSON formats, and `window.pixelArtCanvas` |
+| `styles.css` | Editor layout, responsive rules, light/dark themes, controls, canvas stage and batch-conversion panel |
 | `favicon.svg` | Lightweight vector favicon used by the static page |
 | `robots.txt` | Allows public crawling and points crawlers to the deployed sitemap |
 | `sitemap.xml` | Sitemap for the single public application URL |
@@ -139,6 +139,14 @@ Project and command format changes must update all of these together: `getProjec
 - `stretch`: scale independently to target width and height.
 
 Transparent source pixels remain transparent; visible pixels are quantized and made opaque at an alpha threshold of 128. `contain` leaves transparent margins, and import replaces the current canvas in one undo step. Keep source dimensions independent from target grid dimensions.
+
+### Advanced batch conversion
+
+- The full-width `#batchStudio` panel below the existing workspace is separate from the editor canvas. Do not route batch imports through `importPixelImage()` because that function intentionally replaces the current art and commits history.
+- Batch preset dimensions mirror `densityPresets`; `custom` accepts integer width/height 16–512. Batch color count and fit options mirror the existing 16/32/64 and `contain`/`cover`/`stretch` controls.
+- `pixelizeBatchImage()` processes one file at a time through `createImageBitmap`, the selected fit mode and the shared `quantizePixels()` routine. It preserves alpha and emits each result as a target-resolution PNG.
+- Export packs the PNGs into a dependency-free, UTF-8 ZIP32 archive using stored entries and CRC32. Keep filenames sanitized and unique. The current queue limit is 200 images; surface processing progress and errors in `#batchStatus`.
+- Batch preset controls and queue state are independent from the main canvas and are not part of project JSON/local storage. Keep this separation unless the user asks to persist batch settings.
 
 ## Public browser API
 

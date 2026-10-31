@@ -103,6 +103,28 @@
           <button id="downloadJsonButton" class="export-json" type="button">명령 JSON 다운로드 <span>↓</span></button>
         </aside>
       </section>
+      <section id="batchStudio" class="batch-studio panel" aria-labelledby="batchStudioTitle">
+        <div class="batch-heading">
+          <div><p class="eyebrow">ADVANCED WORKFLOW</p><h2 id="batchStudioTitle">이미지 일괄 픽셀 변환</h2><p class="batch-intro">여러 이미지를 한 번에 불러와 같은 픽셀 밀도와 색상 설정으로 변환하고 ZIP으로 저장합니다. 현재 그리기 캔버스는 변경되지 않습니다.</p></div>
+          <span class="batch-badge">MULTI-IMAGE EXPORT</span>
+        </div>
+        <div class="batch-import-row">
+          <label class="batch-dropzone" id="batchDropzone" for="batchImportInput"><span class="batch-drop-icon">▧</span><strong>이미지 여러 장 불러오기</strong><small>클릭하거나 파일을 여기에 끌어놓으세요</small></label>
+          <input id="batchImportInput" type="file" accept="image/*" multiple hidden />
+          <div class="batch-settings">
+            <label><span>픽셀 프리셋</span><select id="batchPreset">
+              <option value="custom">사용자 크기</option><option value="coarse32">거친 · 32²</option><option value="small64">낮은 밀도 · 64²</option><option value="classic128" selected>기본 · 128²</option><option value="detail192">세밀 · 192²</option><option value="fine256">고밀도 · 256²</option><option value="veryFine384">초고밀도 · 384²</option><option value="ultra512">최대 밀도 · 512²</option>
+            </select></label>
+            <label><span>가로 픽셀</span><input id="batchWidth" type="number" min="16" max="512" value="128" /></label>
+            <label><span>세로 픽셀</span><input id="batchHeight" type="number" min="16" max="512" value="128" /></label>
+            <label><span>색상 수</span><select id="batchColorCount"><option value="16">16색</option><option value="32" selected>32색</option><option value="64">64색</option></select></label>
+            <label><span>맞춤 방식</span><select id="batchFit"><option value="contain">전체 담기</option><option value="cover">채우기·자르기</option><option value="stretch">비율 늘리기</option></select></label>
+          </div>
+        </div>
+        <div class="batch-list-heading"><strong>변환 대기열</strong><span id="batchCount">0개</span><button id="batchClearButton" type="button" class="text-button" disabled>전체 비우기</button></div>
+        <div class="batch-list-wrap"><ol class="batch-list" id="batchList" aria-live="polite"></ol><p class="batch-empty" id="batchEmpty">불러온 이미지가 여기에 표시됩니다.</p></div>
+        <div class="batch-footer"><p id="batchStatus" role="status" aria-live="polite">프리셋을 선택한 뒤 여러 이미지를 추가하세요.</p><button id="batchExportButton" class="button button-dark" type="button" disabled><span aria-hidden="true">↓</span> 변환 후 ZIP 저장</button></div>
+      </section>
       <footer class="footer"><span>PIXEL ATELIER <span class="footer-dot">·</span> 로컬에서 안전하게 작업 중</span><span>모든 좌표는 128 × 128 픽셀 격자 기준</span></footer>
     </main>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
