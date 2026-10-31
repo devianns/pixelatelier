@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f3ed" />
+    <title>Pixel Atelier — 픽셀 아트 캔버스</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Pixel Atelier 홈">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>pixel<span class="brand-light">atelier</span></span>
+        </a>
+        <div class="topbar-meta"><span class="status-dot"></span> 로컬 작업 공간 <span class="meta-divider"></span> 저장은 이 브라우저에서 이루어집니다</div>
+        <button id="exportButton" class="button button-dark" type="button"><span aria-hidden="true">↓</span> PNG 내보내기</button>
+      </header>
+
+      <section class="intro">
+        <div>
+          <p class="eyebrow">PIXEL ART WORKSPACE <span>01 / 01</span></p>
+          <h1>작은 픽셀로<br /><em>큰 상상</em>을 그려보세요.</h1>
+          <p class="intro-copy">사람이 직접 그리거나, AI가 정해진 명령으로 같은 캔버스를 채울 수 있어요.</p>
+        </div>
+        <div class="spec-card"><span class="spec-icon">▦</span><div><strong>400 × 400</strong><small>표시 캔버스</small></div><span class="spec-separator"></span><div><strong>128 × 128</strong><small>픽셀 격자 · 16,384 px</small></div></div>
+      </section>
+
+      <section class="workspace" aria-label="픽셀 아트 작업 공간">
+        <aside class="tool-panel panel">
+          <div class="panel-heading"><span>01</span><h2>도구</h2><span class="heading-rule"></span></div>
+          <div class="tool-grid" role="toolbar" aria-label="그리기 도구">
+            <button class="tool-button active" data-tool="pencil" aria-label="연필" title="연필 (B)"><span>✎</span><small>연필</small></button>
+            <button class="tool-button" data-tool="eraser" aria-label="지우개" title="지우개 (E)"><span>▱</span><small>지우개</small></button>
+            <button class="tool-button" data-tool="fill" aria-label="채우기" title="채우기 (G)"><span>◩</span><small>채우기</small></button>
+            <button class="tool-button" data-tool="line" aria-label="직선" title="직선 (L)"><span>／</span><small>직선</small></button>
+            <button class="tool-button" data-tool="rect" aria-label="사각형" title="사각형 (R)"><span>□</span><small>사각형</small></button>
+            <button class="tool-button" data-tool="eyedropper" aria-label="스포이트" title="스포이트 (I)"><span>⌕</span><small>스포이트</small></button>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="panel-heading compact"><span>02</span><h2>색상</h2></div>
+          <label class="color-picker-wrap" for="colorPicker"><span id="colorPreview" class="color-preview"></span><span class="color-value"><small>선택된 색상</small><strong id="colorHex">#273B3A</strong></span><input id="colorPicker" type="color" value="#273b3a" aria-label="그리기 색상 선택" /></label>
+          <div class="palette-heading"><span>기본 팔레트</span><button id="addColorButton" class="icon-button" type="button" aria-label="선택한 색상을 팔레트에 추가" title="팔레트에 추가">＋</button></div>
+          <div id="palette" class="palette" aria-label="색상 팔레트"></div>
+
+          <div class="section-divider"></div>
+          <div class="panel-heading compact"><span>03</span><h2>보기</h2></div>
+          <label class="toggle-row"><span><strong>격자 표시</strong><small>픽셀 경계선 보기</small></span><input id="gridToggle" type="checkbox" checked /><i class="switch"></i></label>
+          <div class="zoom-row"><span>확대 보기</span><div class="zoom-control"><button id="zoomOut" type="button" aria-label="확대 축소">−</button><strong id="zoomLabel">100%</strong><button id="zoomIn" type="button" aria-label="확대">＋</button></div></div>
+        </aside>
+
+        <div class="canvas-column">
+          <div class="canvas-toolbar panel">
+            <div class="canvas-title"><span class="live-dot"></span><strong>새로운 작품</strong><span class="unsaved" id="saveStatus">자동 저장됨</span></div>
+            <div class="canvas-actions"><button id="undoButton" class="icon-button" type="button" aria-label="실행 취소" title="실행 취소 (Ctrl+Z)" disabled>↶</button><button id="redoButton" class="icon-button" type="button" aria-label="다시 실행" title="다시 실행 (Ctrl+Shift+Z)" disabled>↷</button><span class="action-divider"></span><button id="clearButton" class="text-button" type="button">캔버스 비우기</button></div>
+          </div>
+          <div class="canvas-stage" id="canvasStage">
+            <div class="canvas-frame" id="canvasFrame"><canvas id="artCanvas" width="400" height="400" aria-label="400 곱하기 400 픽셀 아트 캔버스. 마우스로 그릴 수 있습니다." tabindex="0"></canvas></div>
+            <div class="canvas-caption"><span>128 × 128 GRID</span><span id="cursorPosition">X: — &nbsp; Y: —</span><span>400 × 400 DISPLAY</span></div>
+          </div>
+          <div class="bottom-hint"><span class="hint-key">B</span> 연필 <span class="hint-key">E</span> 지우개 <span class="hint-key">G</span> 채우기 <span class="hint-spacer"></span> <span class="mouse-icon">⌖</span> 캔버스를 클릭하고 드래그해 그리기</div>
+        </div>
+
+        <aside class="ai-panel panel">
+          <div class="panel-heading"><span>AI</span><h2>AI 스튜디오</h2><span class="heading-rule"></span></div>
+          <div class="ai-card"><div class="ai-sparkle">✳</div><div><strong>같은 캔버스, 다른 방식</strong><p>AI는 아래 명령 규격으로 픽셀을 그립니다. 사람이 그린 그림 위에 이어서 작업할 수도 있어요.</p></div></div>
+          <div class="api-label"><span class="api-indicator"></span> CANVAS API <code>v1.0</code></div>
+          <div class="api-chips"><code>setPixel</code><code>fillRect</code><code>drawLine</code><code>fillPolygon</code></div>
+          <label class="prompt-label" for="aiCommands">그리기 명령 <span>JSON</span></label>
+          <textarea id="aiCommands" spellcheck="false" aria-label="AI 그리기 JSON 명령" placeholder="AI가 생성한 명령을 여기에 붙여넣으세요"></textarea>
+          <button id="runAiButton" class="button button-ai" type="button"><span>✳</span> 명령 실행하기</button>
+          <p id="aiMessage" class="ai-message" aria-live="polite">실행 전 미리보기에서 명령을 확인합니다.</p>
+          <button id="exampleButton" class="example-link" type="button">예시 명령 불러오기 <span>↗</span></button>
+          <div class="section-divider"></div>
+          <div class="format-heading"><strong>명령 형식</strong><span>미니 가이드</span></div>
+          <pre class="code-sample"><span class="code-muted">// 한 픽셀 지정</span>
+{ "op": "setPixel", "x": 64, "y": 64,
+  "color": "#e28a5b" }</pre>
+          <pre class="code-sample"><span class="code-muted">// 여러 작업을 순서대로</span>
+[
+  { "op": "fillRect", "x": 40, "y": 40,
+    "width": 48, "height": 48, "color": "#e28a5b" },
+  { "op": "fillPolygon", "points": [[64,20],
+    [100,58], [28,58]], "color": "#273b3a" }
+]</pre>
+          <button id="downloadJsonButton" class="export-json" type="button">현재 그림 JSON으로 저장 <span>↓</span></button>
+        </aside>
+      </section>
+      <footer class="footer"><span>PIXEL ATELIER <span class="footer-dot">·</span> 로컬에서 안전하게 작업 중</span><span>모든 좌표는 128 × 128 픽셀 격자 기준</span></footer>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
