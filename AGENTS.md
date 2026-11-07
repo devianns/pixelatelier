@@ -34,7 +34,7 @@ The JavaScript is one IIFE in `app.js`; it has no module imports. Some toolbar c
 - `buffer` is the logical-resolution offscreen canvas. `pixels` is its row-major RGBA `Uint8ClampedArray`, exactly `gridWidth * gridHeight * 4` bytes.
 - Pixels are addressed from top-left: x increases rightward, y downward. Valid point coordinates are `0 <= x < gridWidth`, `0 <= y < gridHeight`.
 - `getDrawBounds()` fits the logical canvas inside the square display while preserving its aspect ratio. Pointer mapping rejects clicks in the remaining letterbox.
-- Both art and offscreen canvas contexts preserve alpha. `render()` scales RGBA pixels with smoothing disabled. Pixel boundary lines are drawn on the separate `#gridOverlay` canvas, never into `#artCanvas` or the logical RGBA buffer. `gridToggle` also switches the `#canvasFrame` transparency checkerboard to a user-selected solid preview background; both are display-only and must not alter art pixels or PNG exports. Store the solid preview color separately from project JSON.
+- Both art and offscreen canvas contexts preserve alpha. `render()` scales RGBA pixels with smoothing disabled. Pixel boundary lines are drawn on the separate `#gridOverlay` canvas using the same `getDrawBounds()` and logical grid dimensions as the editable/exported raster; never draw guides into `#artCanvas` or the RGBA buffer. The pixel-guide toggle and transparency-checkerboard toggle are independent. Turning off the checkerboard shows the separately saved solid preview color while the actual pixel guide remains visible. Neither view preference alters art pixels or PNG exports; the checkerboard and background color are local display settings, not project JSON.
 - `resizeGrid()` validates dimensions and resamples existing artwork with nearest-neighbor scaling. It records one history entry unless called with `record=false` as part of a larger transaction.
 
 Preset keys and values are defined in `densityPresets` in `app.js`:
@@ -53,9 +53,9 @@ Non-preset or rectangular sizes are represented with preset `custom`. When both 
 
 ## Application state and history
 
-`state` contains the selected color/tool, grid visibility, zoom, image import color count and fit, theme, active preset, pointer-drawing state, and history stacks. `paletteColors` is a separate array with at most 24 six-digit hex colors.
+`state` contains the selected color/tool, pixel-guide visibility, transparency-checkerboard visibility, preview-only background color, zoom, image import color count and fit, theme, active preset, pointer-drawing state, and history stacks. `paletteColors` is a separate array with at most 24 six-digit hex colors. Checkerboard visibility and preview color persist under separate local-storage keys and do not enter project JSON.
 
-Each undo snapshot stores logical dimensions, a pixel copy, palette, grid visibility, active color, image-import options and preset. History is capped at 50 entries. Resize, image import, drawing gestures, clear, API edits, project import and a valid JSON command document are committed as single edits. Undo uses `Ctrl+Z`; redo uses `Ctrl+Shift+Z` or `Ctrl+Y`. Textareas and inputs retain their browser-native text undo behavior because application shortcuts are ignored while they are focused.
+Each undo snapshot stores logical dimensions, a pixel copy, palette, pixel-guide visibility, active color, image-import options and preset. History is capped at 50 entries. The transparency-checkerboard toggle and preview color are display-only local preferences and are not part of art history. Resize, image import, drawing gestures, clear, API edits, project import and a valid JSON command document are committed as single edits. Undo uses `Ctrl+Z`; redo uses `Ctrl+Shift+Z` or `Ctrl+Y`. Textareas and inputs retain their browser-native text undo behavior because application shortcuts are ignored while they are focused.
 
 Theme, zoom and selected tool are saved in projects but are not part of the art-history snapshot. Do not assume undo restores those view preferences.
 

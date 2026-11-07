@@ -93,10 +93,13 @@
 .canvas-frame{position:relative}
 #gridOverlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #gridOverlay[hidden]{display:none}
-.canvas-frame.grid-hidden{background-image:none;background-color:var(--preview-solid-background,#202124)}
-:root[data-theme="dark"] .canvas-frame.grid-hidden{background-image:none;background-color:var(--preview-solid-background,#202124)}
+.canvas-frame.checkerboard-hidden{background-image:none;background-color:var(--preview-solid-background,#202124)}
+:root[data-theme="dark"] .canvas-frame.checkerboard-hidden{background-image:none;background-color:var(--preview-solid-background,#202124)}
+:root .canvas-stage{background-image:none}
+:root[data-theme="dark"] .canvas-stage{background-image:none}
+.tool-panel>.panel-heading.view-heading{grid-column:1/-1;grid-row:6}
+.tool-panel>.view-controls{grid-column:1/-1;grid-row:7;display:flex;flex-direction:column;gap:12px;min-width:0}
 .view-background-row{display:flex;align-items:center;justify-content:space-between;margin-top:11px;color:#727e74;font-size:9px}
 .view-background-row input{width:34px;height:25px;padding:2px;border:1px solid #e5e6df;border-radius:4px;background:#fff;cursor:pointer}
 :root[data-theme="dark"] .view-background-row{color:#c0cac4}
 :root[data-theme="dark"] .view-background-row input{border-color:#3a444f;background:#272f39}
-@media(max-width:680px){.tool-panel>.compact:nth-of-type(3)~.view-background-row{grid-column:1/-1;grid-row:6}.tool-panel>.compact:nth-of-type(3)~.zoom-row{grid-row:7}}
