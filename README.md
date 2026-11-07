@@ -165,10 +165,16 @@ const formatHelp = pixelArtCanvas.getJSONFormatHelp();
 
 `width`와 `height` 속성은 현재 논리 격자 크기입니다. `getState()`는 현재 크기와 RGBA `Uint8ClampedArray`를 반환합니다. `replacePixels(rgbaBytes)`는 현재 격자와 정확히 같은 길이의 픽셀 배열을 적용합니다. `exportPNG()`는 격자 오버레이가 섞이지 않은 400×400 아트 캔버스 데이터 URL을, 상단 PNG 내보내기 버튼은 현재 논리 격자 크기의 PNG 파일을 만듭니다.
 
+## 공통 스튜디오 UI 규칙
+
+본 픽셀 스튜디오와 Pixel Motion Studio는 같은 라이트/다크 팔레트, 시스템 글꼴, 상단바와 패널 규칙, 입력/버튼 크기, 간격, 키보드 포커스 표시를 사용합니다. 캔버스 도구와 프레임/미리보기 배치는 각 앱 작업에 맞게 유지합니다. 프레임워크나 원격 UI 라이브러리는 사용하지 않습니다. 규칙과 복사본 동기화 방식은 [`STUDIO_UI_SYSTEM.md`](./STUDIO_UI_SYSTEM.md)에 있습니다.
+
 ## 파일 안내
 
 - `index.html`: 화면 구조와 에디터 컨트롤
 - `styles.css`: 라이트/다크 테마, 반응형 레이아웃, 에디터 시각 스타일
+- `studio-ui.css`: Pixel Studio와 모션 스튜디오가 공유하는 로컬 디자인 토큰과 공통 컨트롤 스타일
+- `STUDIO_UI_SYSTEM.md`: 두 스튜디오의 공통 UI/UX 규칙 및 복사본 동기화 안내
 - `app.js`: 픽셀 상태, 캔버스 렌더링, 도구, 단일/일괄 이미지 변환 및 ZIP 내보내기, JSON/API, 저장/불러오기
 - 픽셀아트 JSON, 원본 이미지, 미리보기 및 GIF 프레임은 `SubProjects/private-image-assets-saver/`에 종류별로 로컬 보관합니다. 이 폴더는 Git에서 제외됩니다. JSON 예제 가져오기와 GIF 제작 절차는 해당 폴더의 README를 참고하세요.
 - `.gitignore`: 비공개 에셋 보관 폴더와 독립 서브프로젝트 제외 규칙

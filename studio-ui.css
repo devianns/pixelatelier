@@ -1,0 +1,375 @@
+/* Studio UI System v1
+   Framework-free shared visual contract for the Pixel Studio family. */
+:root {
+  color-scheme: light;
+  --ui-bg: #f3f5f3;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f8faf8;
+  --ui-border: #dfe5e1;
+  --ui-text: #26332e;
+  --ui-muted: #68776f;
+  --ui-accent: #6f9884;
+  --ui-accent-strong: #456f5d;
+  --ui-accent-soft: #e8f0eb;
+  --ui-warm: #d3a475;
+  --ui-danger: #b85f5f;
+  --ui-focus: #78a890;
+  --ui-radius-sm: 6px;
+  --ui-radius-md: 10px;
+  --ui-radius-lg: 14px;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 20px;
+  --ui-space-6: 24px;
+  --ui-control-height: 36px;
+  --ui-shadow-panel: 0 8px 24px rgb(27 41 34 / 6%);
+  --ui-font: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ui-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+
+  /* Map the existing app-specific variables to the shared palette. */
+  --ink: var(--ui-text);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --paper: var(--ui-bg);
+  --panel: var(--ui-surface);
+  --accent: var(--ui-accent);
+  --accent-deep: var(--ui-accent-strong);
+  --accent-pale: var(--ui-accent-soft);
+  --sage: var(--ui-accent);
+  --warm: var(--ui-warm);
+  --mono: var(--ui-mono);
+  font-family: var(--ui-font);
+  color: var(--ui-text);
+  background: var(--ui-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-bg: #171d20;
+  --ui-surface: #20282b;
+  --ui-surface-soft: #252f32;
+  --ui-border: #374348;
+  --ui-text: #e7ede9;
+  --ui-muted: #aab7b0;
+  --ui-accent: #9bc7ad;
+  --ui-accent-strong: #4d8068;
+  --ui-accent-soft: #293b33;
+  --ui-warm: #d7ad82;
+  --ui-danger: #e08a82;
+  --ui-focus: #a4d4b8;
+  --ui-shadow-panel: 0 10px 28px rgb(0 0 0 / 20%);
+  --ink: var(--ui-text);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --paper: var(--ui-bg);
+  --panel: var(--ui-surface);
+  --accent: var(--ui-accent);
+  --accent-deep: var(--ui-accent-strong);
+  --accent-pale: var(--ui-accent-soft);
+  --sage: var(--ui-accent);
+  --warm: var(--ui-warm);
+  background: var(--ui-bg);
+  color: var(--ui-text);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { min-width: 360px; background: var(--ui-bg); }
+
+body {
+  color: var(--ui-text);
+  background: var(--ui-bg) !important;
+  font-family: var(--ui-font);
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea { font: inherit; }
+
+button { color: inherit; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.app-shell {
+  width: min(100%, 1600px);
+  padding-inline: clamp(16px, 3vw, 42px);
+}
+
+.topbar {
+  min-height: 68px;
+  height: auto;
+  gap: var(--ui-space-4);
+  border-color: var(--ui-border);
+}
+
+.brand {
+  color: var(--ui-text);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -.3px;
+}
+
+.topbar-meta,
+.intro-copy,
+.hint,
+.field-help,
+.command-note,
+.ai-message,
+.status-message,
+.format-note,
+.bottom-hint {
+  color: var(--ui-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.intro {
+  align-items: center;
+  gap: var(--ui-space-5);
+  padding-block: 24px;
+}
+
+.intro h1 { color: var(--ui-text); }
+
+.eyebrow,
+.intro h1 em,
+.brand-light { color: var(--ui-accent-strong); }
+
+.workspace { gap: var(--ui-space-4); }
+
+.panel,
+.spec-card {
+  color: var(--ui-text);
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  box-shadow: var(--ui-shadow-panel);
+}
+
+.panel-heading h2,
+.canvas-title strong,
+.format-heading strong,
+.frame-info strong,
+.setting-row strong,
+.output-card strong,
+.panel-heading h2 { color: var(--ui-text); }
+
+.panel-heading { align-items: center; gap: 10px; }
+
+.panel-heading > span:first-child {
+  color: var(--ui-accent-strong);
+  background: var(--ui-accent-soft);
+  border-radius: var(--ui-radius-sm);
+}
+
+.heading-rule,
+.section-divider,
+.action-divider,
+.settings-divider,
+.stat-divider,
+.meta-divider { background-color: var(--ui-border); }
+
+.button,
+.button-primary,
+.button-secondary,
+.button-muted,
+.button-dark,
+.button-ai,
+.play-button,
+.export-button {
+  min-height: var(--ui-control-height);
+  border-radius: var(--ui-radius-sm);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 650;
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+}
+
+.button-primary,
+.button-dark,
+.button-ai,
+.play-button,
+.export-button {
+  color: #fff;
+  background: var(--ui-accent-strong);
+}
+
+:root[data-theme="dark"] .button-primary,
+:root[data-theme="dark"] .button-dark,
+:root[data-theme="dark"] .button-ai,
+:root[data-theme="dark"] .play-button,
+:root[data-theme="dark"] .export-button { color: #fff; }
+
+.button-secondary,
+.button-muted {
+  color: var(--ui-accent-strong);
+  background: var(--ui-accent-soft);
+  border: 1px solid var(--ui-border);
+}
+
+.button:hover:not(:disabled),
+.button-primary:hover:not(:disabled),
+.button-secondary:hover:not(:disabled),
+.button-muted:hover:not(:disabled),
+.button-dark:hover:not(:disabled),
+.button-ai:hover:not(:disabled),
+.play-button:hover:not(:disabled),
+.export-button:hover:not(:disabled) {
+  filter: brightness(1.04);
+}
+
+.icon-button,
+.theme-toggle,
+.zoom-control button {
+  color: var(--ui-muted);
+  background: var(--ui-surface-soft);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-sm);
+}
+
+.icon-button { width: 36px; height: 36px; }
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+select,
+textarea,
+.field-control,
+.number-wrap input {
+  color: var(--ui-text);
+  background-color: var(--ui-surface);
+  border-color: var(--ui-border);
+  border-radius: var(--ui-radius-sm);
+}
+
+.field-control,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+select { min-height: var(--ui-control-height); }
+
+.image-tools input,
+.image-tools select,
+.batch-settings input,
+.batch-settings select,
+.zoom-control button { min-height: 28px; }
+
+.image-tools input,
+.image-tools select { height: 28px; }
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] { accent-color: var(--ui-accent-strong); }
+
+.drop-zone,
+.batch-dropzone {
+  border-color: color-mix(in srgb, var(--ui-accent) 55%, var(--ui-border));
+  border-radius: var(--ui-radius-md);
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over,
+.batch-dropzone:hover,
+.batch-dropzone.drag-over {
+  border-color: var(--ui-accent);
+  background-color: var(--ui-accent-soft);
+}
+
+.tool-button,
+.frame-item,
+.output-card,
+.ai-card,
+.code-sample,
+.api-chips code,
+.batch-settings,
+.batch-list-wrap,
+.batch-item {
+  border-radius: var(--ui-radius-sm);
+}
+
+.tool-button.active,
+.frame-item.selected {
+  border-color: var(--ui-accent);
+  background: var(--ui-accent-soft);
+}
+
+.canvas-stage,
+.preview-stage {
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+}
+
+.canvas-toolbar { border-radius: var(--ui-radius-md); }
+
+.list-heading,
+.palette-heading,
+.field-label,
+.prompt-label,
+.panel-heading h2,
+.format-heading strong { color: var(--ui-text); }
+
+.panel-heading h2 { font-size: 14px; }
+
+.intro h1 { font-size: clamp(25px, 3vw, 32px); }
+
+.field-label,
+.prompt-label,
+.list-heading,
+.palette-heading,
+.toggle-row strong,
+.setting-row strong,
+.frame-info strong { font-size: 12px; }
+
+.tool-button small,
+.field-help,
+.command-note,
+.ai-message,
+.status-message,
+.empty-hint,
+.frame-info small,
+.setting-row small,
+.output-card small { font-size: 11px; }
+
+.text-button,
+.example-link,
+.drop-zone strong { font-size: 12px; }
+
+.footer {
+  min-height: 48px;
+  height: auto;
+  padding-block: 10px;
+  color: var(--ui-muted);
+  font: 11px var(--ui-mono);
+  letter-spacing: .01em;
+}
+
+.toast { border-radius: var(--ui-radius-md); }
+
+@media (max-width: 760px) {
+  .app-shell { padding-inline: 16px; }
+  .topbar { min-height: 60px; }
+  .intro { padding-block: 20px; }
+  .workspace { gap: 12px; }
+  .footer { gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

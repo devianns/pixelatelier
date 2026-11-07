@@ -1,12 +1,12 @@
 # Pixel Studio agent guide
 
-This file is the handoff document for future coding agents working in this repository. Keep it synchronized with `app.js`, `index.html`, and `styles.css`. The user-facing overview and JSON formats live in `README.md`; local example artwork is kept in the ignored asset archive.
+This file is the handoff document for future coding agents working in this repository. Keep it synchronized with `app.js`, `index.html`, `styles.css`, and `studio-ui.css`. The user-facing overview and JSON formats live in `README.md`; local example artwork is kept in the ignored asset archive.
 
 ## Project purpose and boundaries
 
 Pixel Studio is a local, browser-based pixel editor. A person can draw on the canvas, import and quantize a reference image, or paste structured JSON commands that an AI generated. It does not call an AI model or server. Do not describe the JSON editor as a live AI connection.
 
-The project is deliberately buildless: open `index.html` in a browser. There is no package manager manifest, framework, backend, network API, or test runner. Keep dependencies out unless the user asks for a larger architectural change. The only optional network dependency is the Google Fonts import in `styles.css`; the app itself works with system font fallbacks.
+The project is deliberately buildless: open `index.html` in a browser. There is no package manager manifest, framework, backend, network API, or test runner. Keep dependencies out unless the user asks for a larger architectural change. Shared visual rules are authored in local CSS, and fonts use system stacks without a runtime download.
 
 ## Source map
 
@@ -14,7 +14,9 @@ The project is deliberately buildless: open `index.html` in a browser. There is 
 | --- | --- |
 | `index.html` | Static page structure, side panels, drawing tools, canvas element, JSON editor and independent batch-conversion panel |
 | `app.js` | All application state, dynamic toolbar controls, canvas pixels/rendering, drawing tools, presets, history, local persistence, image conversion, batch PNG/ZIP export, JSON formats, and `window.pixelArtCanvas` |
-| `styles.css` | Editor layout, responsive rules, light/dark themes, controls, canvas stage and batch-conversion panel |
+| `styles.css` | Pixel editor layout, responsive rules, canvas stage and batch-conversion panel |
+| `studio-ui.css` | Shared Pixel Studio family design tokens and components; canonical source for the identical Motion Studio copy |
+| `STUDIO_UI_SYSTEM.md` | Cross-studio UI rules, layout contract, tokens and copy-sync guidance |
 | `favicon.svg` | Lightweight vector favicon used by the static page |
 | `robots.txt` | Allows public crawling and points crawlers to the deployed sitemap |
 | `sitemap.xml` | Sitemap for the single public application URL |
@@ -169,5 +171,6 @@ The top PNG button exports the logical buffer at current grid dimensions. API `e
 4. For persisted settings or format changes, verify project import/export, local restore, command JSON, undo/redo behavior, and legacy bare arrays.
 5. Keep the default project buildless. Do not add dependencies or imply model connectivity unless requested.
 6. Keep UI labels and user-facing explanations in Korean; retain stable JSON keys in English.
+7. Keep shared CSS changes synchronized with `SubProjects/PixelMotionStudio/studio-ui.css`; that copy must remain self-contained for independent deployment. Reuse shared tokens and shell rules while preserving product-specific panel content and editor behavior.
 
 There is no configured automated test command or browser preview harness in this repository. If a change needs runtime QA, use an available browser directly and report when the environment cannot provide one; do not invent a test command.
